@@ -1,0 +1,11 @@
+FROM resin/rpi-raspbian
+
+COPY grafana_2.1_armv6l.tgz /tmp/grafana_2.1_armv6l.tgz
+RUN mkdir /opt/grafana \
+	&& cd /opt/grafana \
+	&& tar zxf /tmp/grafana_2.1_armv6l.tgz
+
+EXPOSE 3000
+
+WORKDIR /opt/grafana
+ENTRYPOINT ["./grafana"]
