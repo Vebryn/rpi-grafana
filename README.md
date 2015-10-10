@@ -1,12 +1,7 @@
 # rpi-grafana
-grafana on raspberry
+Dockerfile to build and run Grafana on a Raspberry Pi. It has been tested with Grafan 2.1 and a armv6l chip (rpi A+/B+).
 
-# Prerequisites
-* Raspberry PI based on ARM6 chip
-
-# Usage
-* Install Hypriot on your rpi
-* Use following commands to build and run grafana container
+## Usage
 ```
 docker build --tag="grafana" .
 docker run --detach=true --name grafana --publish=3000 grafana
