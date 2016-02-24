@@ -1,5 +1,5 @@
 # rpi-grafana
-Dockerfile to build and run Grafana on a Raspberry Pi. It has been tested with Grafana 3 and a armv6l chip (rpi B+). I test compilation on a rpi A+, it appears it doesn't have enough RAM. Grafana works well if you take binaries from rpi B+.
+Dockerfile to build and run Grafana 3 on a Raspberry Pi. Workflow has been tested on a armv6l chip (RPi B+). Some tuning may be required in order to autobuild using Docker. RPi A+ doesn't have enough memory to build Grafana. Please use RPi B+.
 
 ## Usage
 ```
