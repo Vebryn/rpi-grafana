@@ -13,3 +13,5 @@ To build lite version, specify Dockerfile name to Docker
 ```
 docker build -f Dockerfile-lite .
 ```
+## References
+https://nicolas.steinmetz.fr/blog/post/Grafana-2.5.0-sur-Raspberry-Pi-%28arm%29
