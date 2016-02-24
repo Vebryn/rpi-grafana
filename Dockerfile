@@ -1,23 +1,17 @@
-FROM hypriot/rpi-golang:1.4.2
+FROM hypriot/rpi-golang
 
-RUN go get github.com/grafana/grafana \
-	&& cd src/github.com/grafana/grafana/ \
+RUN go get -t -d github.com/grafana/grafana \
+	&& cd src/github.com/grafana/grafana \
 	&& go run build.go setup \
 	&& godep restore \
-	&& go build . \
 	&& apt-get update \
-	&& apt-get install -qy --no-install-recommends wget bzip2 \
-	&& wget https://iojs.org/dist/v2.5.0/iojs-v2.5.0-linux-armv6l.tar.gz \
-	&& tar zxf iojs-v2.5.0-linux-armv6l.tar.gz \
-	&& PATH=`pwd`/iojs-v2.5.0-linux-armv6l/bin:$PATH \
-	&& npm install \
+	&& apt-get install --no-install-recommends -qy wget curl libfreetype6 libfontconfig1 \
+	&& cd /usr/local/bin \
+	&& wget https://github.com/piksel/phantomjs-raspberrypi/raw/master/bin/phantomjs \
+	&& chmod a+x phantomjs \
+	&& cd /gopath1.5/src/github.com/grafana/grafana \
+	&& curl -sLS https://apt.adafruit.com/add |bash \
+	&& apt-get install -qy node \
 	&& npm install -g grunt-cli \
-	&& node node_modules/karma-phantomjs-launcher/node_modules/phantomjs/install.js \
-	&& grunt \
-	&& mkdir /opt/grafana \
-	&& cp -r grafana conf public_gen /opt/grafana
-
-EXPOSE 3000
-VOLUME /opt/grafana
-
-ENTRYPOINT ["/opt/grafana/grafana"]
+	&& npm install \
+	&& go run build.go build package
